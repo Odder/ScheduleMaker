@@ -1,0 +1,167 @@
+*:focus{
+    outline: none!important;
+}
+
+body {
+	background-color: #eee;
+}
+
+.container {
+    width: 80%;
+}
+.navbar {
+	background-color: #183651;
+}
+
+h2 {
+	color: white;
+}
+
+.wrapper {
+	background-color: #F7F7F7;
+	padding: 10px;
+	border-radius: 5px;
+	border-color: #C6C6C6;
+	border-style: solid;
+	border-width: 1px;
+	margin: 15px 0 15px 0;
+}
+
+.largeMarginBottom {
+     margin-bottom: 40px;
+ }
+
+.mediumMarginBottom {
+    margin-bottom: 20px;
+}
+
+.largeMarginRight {
+    margin-right: 40px;
+}
+.smallMarginBottom {
+	margin-bottom: 10px;
+}
+
+.smallMarginRight {
+	margin-right: 10px;
+}
+
+.navbar-static {
+	border-radius: 0px;
+}
+
+.deleteRow {
+    width: 40px;
+    opacity: 0.5;
+    transition: 0.3s;
+}
+
+.deleteRow:hover {
+    opacity: 1;
+}
+
+#popupContainer{
+    width: 400px;
+    border-radius: 6px;
+    box-shadow: 0px 0px 15px 0px #777777;
+    position: fixed;
+    left:50%;
+    top: 50%;
+    margin-top: -150px;
+    margin-left:-200px;
+}
+
+.buttons{
+    margin: auto;
+}
+
+
+.popupTextContainer{
+    background: white;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border: 1px solid #ccc;
+    text-align: center;
+    line-height: 23px;
+    font-weight: bold;
+    padding:20px;
+}
+
+.topBar {
+    text-align: center;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+.red {
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+
+.lightBlue {
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+}
+
+.green {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+
+.buttons .btn-danger,
+.buttons .btn-success,
+.buttons .btn-info {
+    margin: 21px 25px 8px 25px;
+    font-weight: bold;
+}
+
+.noMargins {
+    margin: 0;
+}
+.textRight {
+    text-align: right;
+}
+.floatLeft {
+    float: left;
+}
+
+.textRight > label {
+    line-height: 34px;
+}
+
+.row {
+    padding: 5px;
+}
+
+/*JQuery UI tabs*/
+.ui-widget-header {
+    background: none;
+    background-color: #F7F7F7;
+    border-top: 0px ;
+    border-left: 0px ;
+    border-right: 0px ;
+    border-radius: 0px;
+}
+
+.ui-widget-content {
+    border: none;
+    background: none;
+}
+
+.ui-tabs .ui-tabs-nav {
+    margin: 0px -13px;
+    padding: 0 0 0 10px;
+}
+
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active {
+    background: none;
+    background-color: #F7F7F7;
+}

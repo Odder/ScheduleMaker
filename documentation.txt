@@ -1,0 +1,88 @@
+SCHEDULE MAKER :D
+link: http://zoe.odderen.dk/ScheduleMaker/
+
+
+Keyboard shortcuts:
+    enter           -> focus next row
+    shift + enter   -> focus prev row
+    ctrl + enter    -> focus prev row
+    tab             -> focus next col
+    shift + tab     -> focus prev col
+    ctrl + tab      -> focus prev col
+
+    enter (last row)-> add row, focus event of new row
+
+
+
+    backspace       ->  if content is a valid event/format
+                            -> clear input box
+                        else
+                            -> normal backspace    
+    delete          ->  if content is a valid event/format
+                            -> clear input box
+                        else
+                            -> normal delete
+
+Input fields:
+    Event:
+        Automatically suggest events
+
+    Round:
+        Calculated for only WCA event rounds
+
+    Format:
+        type 1, 2, 3 or 5 dependig on the amount of attempts and it will autocomplete it.
+
+    Time input:
+        no need for ':', it corrects your input anyways :)
+
+    starting time:
+        Calculated automatically for you based on durations
+
+    Qualifiers:
+        Only allowed for events with a preceding round.
+
+Buttons:
+    Add Row:
+        Adds a new row (same as pressing enter while focusing the last row)
+
+    Save:
+        Saves the content in your Local Storage.
+            Saved content will be loaded every time you refresh the page :)
+
+    Generate:
+        Prompts a popup box
+        	Features not implemented yet:
+	            Export to:
+	                HTML
+	                HTML + JS (interactive)
+	                CSV
+	                Cubecomps
+
+    red X:
+        Prompts a popup box
+            ->  yes:
+                    -> deletes the row
+                    -> close the popup
+                no: 
+                    -> closes the popup
+        Focus 'yes'
+        	enter
+        		-> deletes the row
+        		-> close the popup 
+
+Missing features (not already mentioned):
+    Handling multiple days
+    Handling multiple comps
+    Generate 
+        Export to:
+            HTML
+            HTML + JS (interactive)
+            CSV
+            Cubecomps
+            	-> http://cubecomps.com/make_your_public_page_looks_great.php
+
+Known bugs:
+	Competition name
+		-> intelligent delete is broken, not supposed to delete the entire title
+			Priority: little
