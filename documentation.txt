@@ -1,6 +1,9 @@
 SCHEDULE MAKER :D
 link: http://zoe.odderen.dk/ScheduleMaker/
 
+Summary:
+This tool is for organisers of Speedcubing competition to help them create a good looking schedule which can be exported to several useful formats.
+
 
 Keyboard shortcuts:
     enter           -> focus next row
@@ -53,11 +56,17 @@ Buttons:
     Generate:
         Prompts a popup box
         	Features not implemented yet:
-	            Export to:
-	                HTML
-	                HTML + JS (interactive)
-	                CSV
-	                Cubecomps
+                Export to:
+    	                HTML + JS (interactive)
+    	                CSV
+    	                Cubecomps
+            Export to:
+                HTML
+                    -> generate:
+                        -> shows HTML code for schedule tables
+                JSON
+                    -> generate:
+                        -> shows JSON format for schedule tables
 
     red X:
         Prompts a popup box
@@ -71,18 +80,27 @@ Buttons:
         		-> deletes the row
         		-> close the popup 
 
+Drag-n-drop:
+    hovering a row highlights it (only if more than 2 rows):
+        you can now drag and drop it, everything will update accordingly.
+
 Missing features (not already mentioned):
-    Handling multiple days
     Handling multiple comps
     Generate 
         Export to:
-            HTML
             HTML + JS (interactive)
             CSV
             Cubecomps
             	-> http://cubecomps.com/make_your_public_page_looks_great.php
+            JSON -> almost implemented
+    Intro:
+        http://usablica.github.io/intro.js/
 
 Known bugs:
 	Competition name
 		-> intelligent delete is broken, not supposed to delete the entire title
 			Priority: little
+
+
+Note for myself:
+    Polymer-project is cool!

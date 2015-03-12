@@ -1,197 +1,122 @@
 var engine = function () {
 
-     /**
-     * Delete a row
-     * @return void
-     */
-    function deleteRow(element) {
-        $(element).closest('.row').remove();
-    }
-
-    /**
-     * Store data!
-     */
-    function saveSchedule() {
-    	localStorage.setItem("compName", $('#competition').val());
-    	var inputFields = $('input'),
-    		data = [];
-
-    	 $('input').each(function () {
-    	 	data.push($(this).val());
-    	 })
-    	localStorage.setItem("ScheduleData", data);
-    	console.log(data);
-    }
-
-    /**
-     * Store data!
-     */
-    function loadSchedule() {
-
-    	var data = localStorage.getItem('ScheduleData').split(','),
-    		dataLen = data.length,
-    		rowCount = ((dataLen - 2) / 9) || 0;
-
-    	for (var i = 1; i < rowCount; i++) {
-	    	addRow();
-    	}
-
-
-    	var inputFields = $('input');
-
-    	for (var i = 0; i < inputFields.length; i++) {
-    		$(inputFields[i]).val(data[i]);
-    	}
-
-    	updateRoundNames() 
-    }
-
-    /**
-     * Build new row
-     * @return void
-     */
-    function addRow() {
-	    $('.lastRow').removeClass('lastRow');
-	    var inputStructure = [$('<div>').addClass('col-xs-2 mediumMarginBottom').append($('<input type="text" list="events">').addClass('form-control lastRow event')),
-	                            $('<div>').append($('<input type="hidden">').addClass('form-control lastRow eventId')),
-	                            $('<div>').addClass('col-xs-2 mediumMarginBottom').append($('<input type="text">').addClass('form-control lastRow round ').prop('disabled', true)),
-	                            $('<div>').addClass('col-xs-2 mediumMarginBottom').append($('<input type="text">').addClass('form-control lastRow format lastRow')),
-	                            $('<div>').addClass('col-xs-1 mediumMarginBottom').append($('<input type="text">').addClass('form-control lastRow start ').prop('maxlength', 5).prop('disabled', true)),
-	                            $('<div>').addClass('col-xs-1 mediumMarginBottom').append($('<input type="text">').addClass('form-control lastRow duration ').prop('maxlength', 5)),
-	                            $('<div>').addClass('col-xs-1 mediumMarginBottom').append($('<input type="text">').addClass('form-control lastRow cutoff ').prop('maxlength', 5)),
-	                            $('<div>').addClass('col-xs-1 mediumMarginBottom').append($('<input type="text">').addClass('form-control lastRow hard ').prop('maxlength', 5)),
-	                            $('<div>').addClass('col-xs-1 mediumMarginBottom').append($('<input type="text">').addClass('form-control lastRow qualifiers ').prop('disabled', true)),
-	                            $('<div>').addClass('col-xs-1 mediumMarginBottom').append($('<button>').addClass('form-control lastRow deleteRow glyphicon glyphicon-remove btn-danger'))],
-	        newRow = $('<div>').addClass('row smallMarginBottom').append(inputStructure);
-	        console.log(newRow);
-	    $('.form-group').append(newRow); 
-	    console.log('new row event ', $('.lastRow').first());
-	    setTimeout(function() {
-	 	   $('.lastRow').first().focus();
-	    }, 100);
-
-    	updateListeners();
-    }
-
-
-    /**
-     * adds event listeners to all elements
-     * @return void
-     */
-    function updateListeners() {
-	    /* add listener for searching events */
-	    $('.event').unbind().keyup(function () {
-	    	$(this).parent().parent().find('.eventId')[0].value = this.value;
-	    	updateRoundNames();
-	    }).change(function () {
-	    	$(this).parent().parent().find('.eventId')[0].value = this.value;
-	    	updateRoundNames();
-	    });
-
-
-
-	    /* add listener for searching formats */
-	    $('.format').unbind().keyup(function () {
-	    	searchAndFill(this, formats);
-	    });
-
-	    /* add listener for time input */
-	    $('.start').unbind().change(function () {
-	    	easyTimeInput(this);
-		});
-
-	    /* add listener for time input */
-	    $('.duration').unbind().change(function () {
-	    	easyTimeInput(this);
-		});
-
-	    /* add listener for time input */
-	    $('.cutoff').unbind().change(function () {
-	    	easyTimeInput(this);
-	    	updateRoundNames();
-		});
-
-	    /* add listener for time input */
-	    $('.hard').unbind().change(function () {
-	    	easyTimeInput(this);
-		});
-
-	    /* add listener for deleting a row */
-	    $('.deleteRow').unbind().click(function () {
-	    	popup.deleteRow(this);
-		});
-
-		/* add listener to document for deleting a cell */
-		$('.duration').blur(function () {updateStartTimes()});
+	 /**
+	 * Delete a row
+	 * @return void
+	 */
+	function deleteRow(element) {
+		$(element).closest('.row').remove();
+		main.updateRows;
 	}
 
-    /**
-     * Updates all the round names so the fit with WCA regulations
-     * @return void
-     */
-    function updateRoundNames() {
-      var eventRounds = $('.round');
-      eventRounds.val('');
+	/**
+	 * Store data!
+	 */
+	function saveSchedule() {
 
-      for (a = 0; a < events.length; a++) {
+		localStorage.setItem("ScheduleDataNew", JSON.stringify(exports.JSON()));
 
-        var currentEventRounds = $('.eventId[value="' + events[a] + '"]');
-        var currentEventLength = currentEventRounds.length;
+	}
 
-        for (b = 0; b < currentEventRounds.length; b++) {
-          var roundInput = $(currentEventRounds[b]).parent().parent().find('.round')[0];
-          var cutoff = $(currentEventRounds[b]).parent().parent().find('.cutoff')[0].value;
+	/**
+	 * Load data!
+	 */
+	function loadSchedule( data ) {
+		if ( data == undefined ) {
+			data = localStorage.getItem('ScheduleDataNew');
+		}
 
-        $(roundInput).closest('.row').find('.qualifiers').prop('disabled', true);
+		$('.rowDraggable').remove();
 
-          currentEventLength = currentEventLength > 4 ? 4 : currentEventLength;
+		// console.log('yo!')
+		var Schedule = eval('(' + data + ')');
+		if (Schedule) {
+			$('#competition').val(Schedule.name);
+
+			for (var i = 0; i < Schedule.details.length; i++) {
+
+				var currentDay = Schedule.details[i];
+				// day = Schedule.details[i].day
+
+				for (var j = 0; j < currentDay.info.length; j++) {
+					var row = currentDay.info[j],
+						tab = $('#tabs-' + (i + 1) );
+
+					engine.addRow(i + 1);
+
+					tab.find('.lastRow.event').val(row.event);
+					tab.find('.lastRow.eventId').val(row.eventId);
+					tab.find('.lastRow.round').val(row.round);
+					tab.find('.lastRow.format').val(row.format);
+					tab.find('.lastRow.start').val(row.start);
+					tab.find('.lastRow.duration').val(row.duration);
+					tab.find('.lastRow.cutoff').val(row.cutoff);
+					tab.find('.lastRow.hard').val(row.hard);
+					tab.find('.lastRow.qualifiers').val(row.qualifiers);
+					// console.log(i,j,row.event);
+				}
+			}
 
 
-          if (cutoff != '') {
-            roundInput.value = 'Combined ';
-          }
-          else {
-            roundInput.value = '';
-          }
+			$('setting.time-zone-abbr').val(Schedule.settings.timeZoneAbbr);
+			$('setting.gmt-offset').val(Schedule.settings.GMTOffset);
 
-          if (b > 3) {
-            roundInput.value = 'Error, too many rounds!';
-            continue;
-          }   
+		}
+		else {
+			addRow(1);
+		}
 
+		main.updateRows();
 
-        $(roundInput).closest('.row').find('.qualifiers').prop('disabled', false);
+	}
 
-        if (b + 1 === currentEventLength) {
-            roundInput.value += 'Final';
-          if(1 == currentEventLength) $(roundInput).closest('.row').find('.qualifiers').prop('disabled', true);
-            continue;
-        }
+	/**
+	 * Build new row
+	 * @param activeTab
+	 * @return void
+	 */
+	function addRow( activeTab ) {
+		var activeTab = activeTab == undefined ? getCurrentTab() : '#tabs-' + activeTab,
+			first = $(activeTab).children().length > 1;
+		$('.lastRow').removeClass('lastRow');
+		var inputStructure = [$('<div>').addClass('col-xs-2').append($('<input type="text" list="events">').addClass('form-control lastRow event')),
+									$('<div>').append($('<input type="hidden">').addClass('form-control lastRow eventId')),
+									$('<div>').addClass('col-xs-2').append($('<input type="text">').addClass('form-control lastRow round ').prop('disabled', true)),
+									$('<div>').addClass('col-xs-2').append($('<input type="text">').addClass('form-control lastRow format')),
+									$('<div>').addClass('col-xs-1').append($('<input type="text">').addClass('form-control lastRow start').prop('maxlength', 5).prop('disabled', first)),
+									$('<div>').addClass('col-xs-1').append($('<input type="text">').addClass('form-control lastRow duration ').prop('maxlength', 5)),
+									$('<div>').addClass('col-xs-1').append($('<input type="text">').addClass('form-control lastRow cutoff ').prop('maxlength', 5)),
+									$('<div>').addClass('col-xs-1').append($('<input type="text">').addClass('form-control lastRow hard ').prop('maxlength', 5)),
+									$('<div>').addClass('col-xs-1').append($('<input type="text">').addClass('form-control lastRow qualifiers ').prop('disabled', true)),
+									$('<div>').addClass('col-xs-1').append($('<button>').addClass('form-control lastRow deleteRow glyphicon glyphicon-remove btn-danger'))],
+				newRow = $('<div>').addClass('row rowDraggable smallMarginBottom').append(inputStructure);
+				// console.log(newRow);
+		$(activeTab).append(newRow); 
+		// console.log('new row event ', $('.lastRow').first());
+		setTimeout(function() {
+			$('.lastRow').first().focus();
+		}, 100);
 
-        else if (b === 0) {
-            roundInput.value += 'First Round';
-          $(roundInput).closest('.row').find('.qualifiers').prop('disabled', true);
-            continue;
-        }
+		main.updateListeners();
+		main.updateRows();
+	}
 
-        if (b + 2 === currentEventLength) {
-            roundInput.value += 'Semi Final';
-            continue;
-        }
+	/**
+	 * Get a the active tab
+	 * @return string
+	 */
+	function getCurrentTab() {
+		// console.log('#' + $('.ui-tabs-active').attr('aria-controls'));
+		return ((r = '#' + $('.ui-tabs-active').attr('aria-controls')) == '#undefined' ? '#tabs-1' : r);
+	}
 
-        if (b === 1) {
-            roundInput.value += 'Second Round';
-            continue;
-        }
-        }
-      }
-
-    }
-
-    return {
-      'deleteRow' : deleteRow,
-      'save'      : save,
-      'load'      : load,
-      'addRow'    : addRow
-    }
+	return {
+		'deleteRow' : deleteRow,
+		'save'      : saveSchedule,
+		'load'      : loadSchedule,
+		'addRow'    : addRow
+	}
 }();
+
+
+

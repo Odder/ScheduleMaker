@@ -1,33 +1,50 @@
+var formats,
+	events = ['3x3x3',
+			  '4x4x4',
+			  '5x5x5',
+			  '6x6x6',
+			  '7x7x7',
+			  '2x2x2',
+			  'Pyraminx',
+			  'Megaminx',
+			  'Square-1',
+			  'Clock',
+			  '3x3x3 Blindfolded',
+			  '3x3x3 Multi BLD',
+			  '4x4x4 Blindfolded',
+			  '5x5x5 Blindfolded',
+			  'Fewest Moves',
+			  '3x3x3 One-handed',
+			  'Skewb'],
+	specialEvents = ['Registration',
+			  'Lunch',
+			  'Winner\'s Ceremony'],
+	rounds = ['First round',
+			  'Second round',
+			  'Semi Final',
+			  'Final',
+			  'Combined Final',
+			  'Combined First Round'],
+	formats = ['Best of 1',
+			   'Best of 2',
+			   'Mean of 3',
+			   'Average of 5'],
+   	shiftDown = false;;
+
 var main = function () {
-	var formats,
-		events = ['3x3x3',
-				  '4x4x4',
-				  '5x5x5',
-				  '6x6x6',
-				  '7x7x7',
-				  '2x2x2',
-				  'Pyraminx',
-				  'Megaminx',
-				  'Square-1',
-				  'Clock',
-				  '3x3x3 Blindfolded',
-				  '3x3x3 Multi BLD',
-				  '4x4x4 Blindfolded',
-				  '5x5x5 Blindfolded',
-				  'Fewest Moves',
-				  '3x3x3 One-handed',
-				  'Skewb'],
-		rounds = ['First round',
-				  'Second round',
-				  'Semi Final',
-				  'Final',
-				  'Combined Final',
-				  'Combined First Round'],
-		formats = ['Best of 1',
-				   'Best of 2',
-				   'Mean of 3',
-				   'Average of 5'],
-		shiftDown = false;
+
+	/**
+	 * time input magic
+	 * @param element element to read from
+	 * @return void
+	 */
+	function easyTimeInput(element) {
+		var currentValue = element.value,
+			newValue;
+
+		newValue = stringToTime(currentValue.replace(/[\.\:\,]/g, ''));
+		element.value = newValue;
+	}
 	
 	/**
 	 * Search for an event.
@@ -58,47 +75,6 @@ var main = function () {
 	}
 
 	/**
-	 * Build new row
-	 * @return void
-	 */
-	function addRow() {
-		$('.lastRow').removeClass('lastRow');
-		var inputStructure = [$('<div>').addClass('col-xs-2 mediumMarginBottom').append($('<input type="text" list="events">').addClass('form-control lastRow event')),
-							  $('<div>').append($('<input type="hidden">').addClass('form-control lastRow eventId')),
-							  $('<div>').addClass('col-xs-2 mediumMarginBottom').append($('<input type="text">').addClass('form-control lastRow round ').prop('disabled', true)),
-							  $('<div>').addClass('col-xs-2 mediumMarginBottom').append($('<input type="text">').addClass('form-control lastRow format lastRow')),
-							  $('<div>').addClass('col-xs-1 mediumMarginBottom').append($('<input type="text">').addClass('form-control lastRow start ').prop('maxlength', 5).prop('disabled', true)),
-							  $('<div>').addClass('col-xs-1 mediumMarginBottom').append($('<input type="text">').addClass('form-control lastRow duration ').prop('maxlength', 5)),
-							  $('<div>').addClass('col-xs-1 mediumMarginBottom').append($('<input type="text">').addClass('form-control lastRow cutoff ').prop('maxlength', 5)),
-							  $('<div>').addClass('col-xs-1 mediumMarginBottom').append($('<input type="text">').addClass('form-control lastRow hard ').prop('maxlength', 5)),
-							  $('<div>').addClass('col-xs-1 mediumMarginBottom').append($('<input type="text">').addClass('form-control lastRow qualifiers ').prop('disabled', true)),
-							  $('<div>').addClass('col-xs-1 mediumMarginBottom').append($('<button>').addClass('form-control lastRow deleteRow glyphicon glyphicon-remove btn-danger'))],
-			newRow = $('<div>').addClass('row smallMarginBottom').append(inputStructure);
-			console.log(newRow);
-		$('#tabs-1').append(newRow); 
-		console.log('new row event ', $('.lastRow').first());
-		setTimeout(function() {
-			$('.lastRow').first().focus();
-		}, 100);
-
-		updateListeners();
-	};
-
-
-	/**
-	 * time input magic
-	 * @param element element to read from
-	 * @return void
-	 */
-	function easyTimeInput(element) {
-		var currentValue = element.value,
-			newValue;
-
-		newValue = stringToTime(currentValue.replace(/[\.\:\,]/g, ''));
-		element.value = newValue;
-	}
-
-	/**
 	 * Makes string input into a readable time view
 	 * @param string string to manipulate
 	 * @return string readable time format
@@ -121,6 +97,28 @@ var main = function () {
 	function updateRoundNames() {
 		var eventRounds = $('.round');
 		eventRounds.val('');
+
+		// disable special events
+		$('.row').each( function () {
+			var currentEvent = $(this).find('.event').val();
+			// console.log($.inArray( currentEvent, specialEvents ));
+			if ( $.inArray( currentEvent, specialEvents ) > -1 ) {
+				$(this).find('.format').val('').prop('disabled', true);
+				$(this).find('.cutoff').val('').prop('disabled', true);
+				$(this).find('.hard').val('').prop('disabled', true);
+				$(this).find('.qualifiers').val('').prop('disabled', true);
+				// console.log('I found something special :O', currentEvent, specialEvents);
+			}
+			else {
+				$(this).find('.format').prop('disabled', false);
+				$(this).find('.cutoff').prop('disabled', false);
+				$(this).find('.hard').prop('disabled', false);
+				$(this).find('.qualifiers').prop('disabled', false);
+			}
+
+		});
+
+		// console.log('fun!');
 
 		for (a = 0; a < events.length; a++) {
 
@@ -159,6 +157,7 @@ var main = function () {
 
 				else if (b === 0) {
 					roundInput.value += 'First Round';
+					$(roundInput).closest('.row').find('.qualifiers').val('');
 					$(roundInput).closest('.row').find('.qualifiers').prop('disabled', true);
 					continue;
 				}
@@ -175,29 +174,29 @@ var main = function () {
 			}
 		}
 
+		// do the starting time
+		$('.start').prop('disabled', true);
+		$('.tabs').each(function () {
+			$(this).find('.start').first().prop('disabled', false);
+		});
+
+		// Do the last row dance!
+		$('input').removeClass('lastRow');
+
+		$('.tabs').each( function () {
+			$(this).find('.row').last().find('input').addClass('lastRow');
+		});
+
+		updateStartTimes();
+
 	}
 
 	/**
-	 * Load data!
+	 * Get a the active tab
+	 * @return string
 	 */
-	function loadSchedule() {
-
-		var data = localStorage.getItem('ScheduleData').split(','),
-			dataLen = data.length,
-			rowCount = ((dataLen - 2) / 9) || 0;
-
-		for (var i = 1; i < rowCount; i++) {
-			addRow();
-		}
-
-
-		var inputFields = $('input');
-
-		for (var i = 0; i < inputFields.length; i++) {
-			$(inputFields[i]).val(data[i]);
-		}
-
-		updateRoundNames();
+	function getCurrentTab() {
+		return '#' + $('.ui-tabs-active').attr('aria-controls');
 	}
 
 	/**
@@ -208,9 +207,9 @@ var main = function () {
 			d = 0;
 		a = a.split(':');
 		b = b.split(':');
-		console.log(a[0],a[1],b[0],b[1]);
+		// console.log(a[0],a[1],b[0],b[1]);
 		c = parseInt(a[1]) + parseInt(b[1]);
-		console.log(c);
+		// console.log(c);
 		if (c > 59) {
 			c -= 60;
 			d += 1;
@@ -228,7 +227,7 @@ var main = function () {
 		var startTimes = $('.start');
 		var durationTimes = $('.duration');
 
-		console.log(startTimes.length, durationTimes.length);
+		// console.log(startTimes.length, durationTimes.length);
 
 		for (a = 1; a < startTimes.length; a++) {
 			if (startTimes[a-1].value.length > 4 && durationTimes[a-1].value.length > 4) {
@@ -252,6 +251,7 @@ var main = function () {
 			$(this).parent().parent().find('.eventId')[0].value = this.value;
 			updateRoundNames();
 		});
+
 
 
 
@@ -285,30 +285,7 @@ var main = function () {
 		$('.deleteRow').unbind().click(function () {
 			popup.deleteRow(this);
 		});
-
-		/* add listener to document for deleting a cell */
-		$('.duration').blur(function () {updateStartTimes()});
 	}
-
-	updateListeners();
-	addRow();
-	$('.start').prop('disabled', false)
-
-
-	/* add listener for new row */
-	$('#addRow').click(function () {
-		addRow();
-	});
-
-	/* add listener for saving */
-	$('#save').click(function () {
-		popup.save();
-	});
-
-	/* add listener for generating schedule */
-	$('#generate').click(function () {
-		popup.generate();
-	});
 
 	/* add listener to document for deleting a cell */
 	$(document).keydown(function (event) {
@@ -318,6 +295,8 @@ var main = function () {
 			var isCustom = ! ($.inArray($(':focus').val(), events) + 1);
 			if ($(':focus').hasClass('event') && isCustom) return;
 
+			if ($(':focus').is('#competition')) return;
+
 			/* Not custom? RESET! */
 			$(':focus').val('');
 			event.preventDefault();
@@ -325,16 +304,16 @@ var main = function () {
 
 		if(event.which == 13 && ($(':focus') != $('#competition'))) {
 
-			var classNames = $(':focus')[0].className,
-				className = '.' + classNames.substr(-6, classNames.length);
-				console.log(className)
+			var classNames = $(':focus')[0].className.split(' '),
+				className = '.' + classNames[classNames.length - 1];
+				// console.log(className, classNames);
 
 			if(shiftDown) {
 				$(':focus').closest('.row').prev().find(className).focus();
 			}
 			else {
 				if ( $(':focus').hasClass('lastRow')) {
-					addRow();
+					engine.addRow();
 				}
 				else {
 					$(':focus').closest('.row').next().find(className).focus();
@@ -352,10 +331,14 @@ var main = function () {
 		if((event.which == 16) || (event.which == 17)) {
 			shiftDown = false;
 		}
+		updateStartTimes();
 	});
 
-	loadSchedule();
-};
+	return {
+		'updateListeners': updateListeners,
+		'updateRows': updateRoundNames
+	}
+
+}();
 
 
-$(document).ready(main);

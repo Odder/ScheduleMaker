@@ -136,7 +136,8 @@ h2 {
 }
 
 .row {
-    padding: 5px;
+    padding: 10px;
+    border-radius: 4px;
 }
 
 /*JQuery UI tabs*/
@@ -164,4 +165,26 @@ h2 {
 .ui-widget-header .ui-state-active {
     background: none;
     background-color: #F7F7F7;
+}
+
+
+textarea {
+    width: 100%;
+    height: 300px;
+    font-size: 10px;
+    line-height: 12px;
+}
+
+.rowDraggable:not(:only-of-type):hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    cursor: move;
+}
+
+gris {
+    display: block;
+    margin: 0px;
+}
+
+input:disabled {
+    opacity: 0.6!important;
 }
