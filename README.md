@@ -12,32 +12,32 @@ Intelligent Input
 --------------
 Schedule Maker makes sure that everything you input will be correct, also, it has a lot of shortcuts for you so you don't have to waste time and spelling out things.
 
-*Event Name*
-- This uses a free-format input, however, it you will need to use the proper naming for official events (autocomplete function will help you with that)
+**Event Name**
+- This uses a free-format input, however, you will need to use the proper naming for official events (autocomplete function will help you with that)
 
-*Round Name*
+**Round Name**
 - This is calculated automatically by Schedule Maker in order to make sure the WCA round naming convention is being kept.
 - This will only be calculated for official events
 
-*Format*
+**Format**
 - Free format
 - Type 1,2,3,5 to explain what type of format it is (1 -> Best of 1, 3 -> Mean of 3, 5-> Average of 5)
 
-*Start*
+**Start**
 - Input your time as: hhmm, it will automatically get corrected, 09:00 can be written as: 900
 - Will only be editable for the beginning of a day, rest will be calculated based on durations
 
-*Duration*
+**Duration**
 - Enter you input as: hhmm, it will automatically get correct, 30 minutes can be written as 30 while 2 hours will be written as 200
 
-*Cutoff*
+**Cutoff**
 - Enter your input as: mmss, it will automatically get correct, 30 seconds can be written as 30, while 1:30 will be written as 130
 - Cutoff is only required for combined rounds
 
-*Hard Time Limit*
+**Hard Time Limit**
 - Enter your input as: mmss, it will automatically get correct, 30 seconds can be written as 30, while 1:30 will be written as 130
 
-*Qualifiers
+**Qualifiers**
 - Amount of people qualifying for this round
 
 Easy re-organisation of schedule
