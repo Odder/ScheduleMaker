@@ -140,6 +140,34 @@ h2 {
     line-height: 34px;
 }
 
+.icon-close {
+    background: url("icons/cross92.png") center no-repeat;
+    background-size: 8px;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    padding: 10px;
+    cursor: pointer;
+    position: relative;
+    top: 5px;
+}
+
+.icon-close:hover {
+    background: url("icons/white-cross92.png") #DD5C52 no-repeat center;
+    background-size: 8px;
+    border-radius: 25px;
+    width: 18px;
+    height: 18px;
+    padding: 10px;
+}
+
+.ui-tabs-anchor .glyphicon {
+    top: 1px;
+    float: initial;
+    color: inherit;
+    cursor: inherit;
+}
+
 .row {
     padding: 10px;
     border-radius: 4px;
@@ -155,7 +183,7 @@ h2 {
     border-radius: 0px;
 }
 
-.ui-widget-content {
+.ui-tabs {
     border: none;
     background: none;
 }
@@ -166,8 +194,8 @@ h2 {
 }
 
 .ui-state-active,
-.ui-widget-content .ui-state-active,
-.ui-widget-header .ui-state-active {
+.ui-tabs .ui-state-active,
+.ui-tabs-nav .ui-state-active {
     background: none;
     background-color: #F7F7F7;
 }

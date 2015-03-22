@@ -24,6 +24,13 @@ var init = function () {
         $('[data-toggle="tooltip"]').tooltip()
     });
 
+    $(function() {
+        $( "#datepicker" ).datepicker({
+            dateFormat: 'dd MM, yy',
+            minDate: 0
+        });
+    });
+
 	engine.load();
 	main.updateListeners();
 	main.updateRows();

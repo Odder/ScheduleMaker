@@ -107,7 +107,7 @@ var engine = function () {
                     $('<input type="text">').addClass('form-control lastRow qualifiers ').prop('disabled', true)
                 ),
                 $('<div>').addClass('col-xs-1 smallPadding').append(
-                    $('<button>').addClass('form-control lastRow deleteRow glyphicon glyphicon-remove btn-danger')
+                    $('<div>').addClass('lastRow deleteRow icon-close')
                 )
             ],
             newRow = $('<div>').addClass('row rowDraggable smallMarginBottom').append(inputStructure);
