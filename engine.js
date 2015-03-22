@@ -79,18 +79,39 @@ var engine = function () {
 		var activeTab = activeTab == undefined ? getCurrentTab() : '#tabs-' + activeTab,
 			first = $(activeTab).children().length > 1;
 		$('.lastRow').removeClass('lastRow');
-		var inputStructure = [$('<div>').addClass('col-xs-2').append($('<input type="text" list="events">').addClass('form-control lastRow event')),
-									$('<div>').append($('<input type="hidden">').addClass('form-control lastRow eventId')),
-									$('<div>').addClass('col-xs-2').append($('<input type="text">').addClass('form-control lastRow round ').prop('disabled', true)),
-									$('<div>').addClass('col-xs-2').append($('<input type="text">').addClass('form-control lastRow format')),
-									$('<div>').addClass('col-xs-1').append($('<input type="text">').addClass('form-control lastRow start').prop('maxlength', 5).prop('disabled', first)),
-									$('<div>').addClass('col-xs-1').append($('<input type="text">').addClass('form-control lastRow duration ').prop('maxlength', 5)),
-									$('<div>').addClass('col-xs-1').append($('<input type="text">').addClass('form-control lastRow cutoff ').prop('maxlength', 5)),
-									$('<div>').addClass('col-xs-1').append($('<input type="text">').addClass('form-control lastRow hard ').prop('maxlength', 5)),
-									$('<div>').addClass('col-xs-1').append($('<input type="text">').addClass('form-control lastRow qualifiers ').prop('disabled', true)),
-									$('<div>').addClass('col-xs-1').append($('<button>').addClass('form-control lastRow deleteRow glyphicon glyphicon-remove btn-danger'))],
-				newRow = $('<div>').addClass('row rowDraggable smallMarginBottom').append(inputStructure);
-				// console.log(newRow);
+		var inputStructure = [
+            $('<div>').addClass('col-xs-2 smallPadding').append(
+                $('<input type="text" list="events">').addClass('form-control lastRow event')
+            ),
+
+            $('<div>').append($('<input type="hidden">').addClass('form-control lastRow eventId')),
+                $('<div>').addClass('col-xs-2 smallPadding').append(
+                    $('<input type="text">').addClass('form-control lastRow round ').prop('disabled', true)
+                ),
+                $('<div>').addClass('col-xs-2 smallPadding').append(
+                    $('<input type="text">').addClass('form-control lastRow format')
+                ),
+                $('<div>').addClass('col-xs-1 smallPadding').append(
+                    $('<input type="text">').addClass('form-control lastRow start').prop('maxlength', 5).prop('disabled', first)
+                ),
+                $('<div>').addClass('col-xs-1 smallPadding').append(
+                    $('<input type="text">').addClass('form-control lastRow duration ').prop('maxlength', 5)
+                ),
+                $('<div>').addClass('col-xs-1 smallPadding').append(
+                    $('<input type="text">').addClass('form-control lastRow cutoff ').prop('maxlength', 5)
+                ),
+                $('<div>').addClass('col-xs-1 smallPadding').append(
+                    $('<input type="text">').addClass('form-control lastRow hard ').prop('maxlength', 5)
+                ),
+                $('<div>').addClass('col-xs-1 smallPadding').append(
+                    $('<input type="text">').addClass('form-control lastRow qualifiers ').prop('disabled', true)
+                ),
+                $('<div>').addClass('col-xs-1 smallPadding').append(
+                    $('<button>').addClass('form-control lastRow deleteRow glyphicon glyphicon-remove btn-danger')
+                )
+            ],
+            newRow = $('<div>').addClass('row rowDraggable smallMarginBottom').append(inputStructure);
+        // console.log(newRow);
 		$(activeTab).append(newRow); 
 		// console.log('new row event ', $('.lastRow').first());
 		setTimeout(function() {

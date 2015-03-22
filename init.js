@@ -20,6 +20,10 @@ var init = function () {
 		stop: function () {main.updateRows();}
 	});
 
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
+
 	engine.load();
 	main.updateListeners();
 	main.updateRows();
@@ -27,3 +31,4 @@ var init = function () {
 
 $(document).ready(main);
 $(document).ready(init);
+

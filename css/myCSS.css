@@ -6,6 +6,7 @@ body {
 	background-color: #eee;
 }
 
+
 .container {
     width: 80%;
 }
@@ -44,6 +45,10 @@ h2 {
 
 .smallMarginRight {
 	margin-right: 10px;
+}
+
+.smallPadding {
+    padding: 0 3px;
 }
 
 .navbar-static {
@@ -167,6 +172,12 @@ h2 {
     background-color: #F7F7F7;
 }
 
+.ui-tabs .ui-tabs-panel {
+    padding: 1em 0;
+}
+
+/*End of JQuery UI tabs*/
+
 
 textarea {
     width: 100%;
@@ -185,6 +196,108 @@ gris {
     margin: 0px;
 }
 
+
+.tooltip-inner {
+    background-color: mediumvioletred;
+}
+
+.tooltip-arrow {
+    border-top-color: mediumvioletred!important;
+}
+
 input:disabled {
     opacity: 0.6!important;
+}
+
+@media screen and (min-width: 1200px) {
+
+    .container {
+        width: 1200px;
+        margin: auto;
+    }
+
+    .smallMarginBottom {
+        margin-bottom: -5px;
+    }
+
+    .wrapper {
+        border-radius: 0;
+    }
+}
+
+@media screen and (min-width: 1000px)and (max-width: 1199px) {
+    .tabs {
+        font-size: 13px;
+    }
+
+    .tabs .form-control {
+        font-size: 13px;
+    }
+
+    .container {
+        width: 95%;
+        margin: auto;
+    }
+
+    .smallMarginBottom {
+        margin-bottom: -5px;
+    }
+}
+
+@media screen and (min-width: 800px)and (max-width: 999px) {
+    .tabs {
+        font-size: 12px;
+    }
+    .tabs .form-control {
+        font-size: 14px;
+        padding: 0;
+        text-align: center;
+    }
+
+    .container {
+        width: 100%;
+        margin: 0px;
+        padding: 0;
+    }
+
+    .smallMarginBottom {
+        margin-bottom: -5px;
+    }
+
+    p {
+        padding: 10px;
+    }
+
+    .wrapper {
+        border-radius: 0;
+    }
+}
+
+@media screen and (min-width: 540px) and (max-width: 799px) {
+    .tabs {
+        font-size: 9px;
+    }
+    .tabs .form-control {
+        font-size: 11px;
+        padding: 0;
+        text-align: center;
+    }
+
+    .container {
+        width: 100%;
+        margin: 0px;
+        padding: 0;
+    }
+
+    .smallMarginBottom {
+        margin-bottom: -10px;
+    }
+
+    p {
+        padding: 10px;
+    }
+
+    .wrapper {
+        border-radius: 0;
+    }
 }
